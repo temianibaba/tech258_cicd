@@ -29,7 +29,7 @@ cd app
 npm install
 npm test
 ```
-![alt text](images/ bash_input.png)<br>
+![alt text](images/bash_input.png)<br>
 ### Done
 **Click build to execute job**
 
