@@ -1,4 +1,4 @@
-# How to make a Jenkins job
+# How to CI 
 ### 1. Login 
 ![alt text](images/jenkins_login.png)
 ### 2. New item
