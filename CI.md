@@ -55,7 +55,7 @@ npm test
 
 ## How to create webhook
 https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project<br>
-Use **http://3.9.14.9:8080/github-webhook/**
+Use **http://jekins_IP/github-webhook/**
 
 ## CI plan
 ![alt text](images/plan1CI.png)<br>
