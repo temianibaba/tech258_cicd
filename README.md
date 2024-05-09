@@ -1,32 +1,33 @@
+# CICD
+![alt text](images/breakdown.png)
 
-# Testing webook with github and Jenkins with Tech257 live demo
+- [CICD](#cicd)
+  - [What is CI](#what-is-ci)
+  - [What is CD](#what-is-cd)
+  - [Webhook](#webhook)
+  - [Why CI/CD?](#why-cicd)
+  - [Delivery vs Deployment](#delivery-vs-deployment)
+  - [Why choose Jenkins](#why-choose-jenkins)
+  - [Why use CICD](#why-use-cicd)
 
-clear
+## What is CI
+![alt text](images/CI.png)<br>
+Continuous integration is the practice of frequently integrating code changes into a shared repository, ensuring early detection of integration errors and promoting collaboration among team members.
+## What is CD
+![alt text](images/CD.png)<br>
+Continuous deployment is the automated process of releasing software changes into production environments after passing automated tests, enabling rapid and frequent delivery of updates to end-users.
+## Webhook
+A webhook is a mechanism that allows real-time communication between two applications, triggering events in one application based on actions or updates in another.
+## Why CI/CD?
+You would use Continuous Integration and Continuous Deployment (CI/CD) to automate software development processes, ensuring faster and more reliable delivery of updates, reducing manual errors, and improving overall efficiency.
 
+## Delivery vs Deployment
+**Deploy** is live infront of users.<br>
+**Delivered** is scp or pushed then npm installed and started or we get jenkins to do it for us.<br>
+Delivery vs deploy depends on what business needs.<br>
 
+## Why choose Jenkins
+![alt text](images/tool_comparisons.png)
 
-# CICD testing cde
-## CI testing with tech221 from localhost to Jenkins 
-## Github ssh set up
-### Testing Jenkins CI
-### Staging 1
-### Webhooks testing
-![](images/CICD.png)
-- Testing CI with Github & Jenkins for tech230 test 100
-- testing CI with webook
-- new webhook added
-
-
-- CD
-```
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@ip:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@ip:/home/ubuntu
-ssh -o "StrictHostKeyChecking=no" ubuntu@ip <<EOF
-	sudo bash ./environment/aap/provision.sh
-    sudo bash ./environment/db/provision.sh
-    cd app
-    pm2 kill
-    pm2 start app.js
-EOF
-```
-                                                  
+## Why use CICD
+We would like to combine and test codes made by different developers quickly.To do this we would have to check the code works first then merge it to the main working branch.

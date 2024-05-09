@@ -1,5 +1,7 @@
-# CI
-- [CI](#ci)
+# CICD demo
+![alt text](images/breakdown.png)<br>
+
+- [CICD demo](#cicd-demo)
   - [Creating your first job](#creating-your-first-job)
     - [1. Login](#1-login)
     - [2. New item](#2-new-item)
@@ -15,7 +17,9 @@
     - [Done](#done)
   - [How to create webhook](#how-to-create-webhook)
   - [CI plan](#ci-plan)
-
+- [CD](#cd)
+  - [Delivery](#delivery)
+  - [Deploy](#deploy)
 ## Creating your first job
 ### 1. Login 
 ![alt text](images/jenkins_login.png)
@@ -62,4 +66,27 @@ Use **http://jekins_IP/github-webhook/**
 We would like to combine and test codes made by different developers quickly.To do this we would have to check the code works first then merge it to the main working branch.
 1. Create dev branch using `git checkout -b dev` **we do not work in the main or master branch** then push on dev branch to update github
 2. Make first job: this will have a webhook to build whenever code is pushed on dev branch, and post build option of triggering second job
+![alt text](images/ci-post-build-actions.png)
 3. Create second job called "merge to main" use post build "git publisher" and merge before build option to merge 
+![alt text](images/ci-merge-source-code-behave.png)
+![alt text](images/ci-merge-post-build-actions.png)
+
+# CD
+![alt text](images/plan3CD.png)
+Firstly we want to get 
+## Delivery
+1. Create ec2 instance
+2. Allow 8080 22 for now (we will need port 80 and 3000 later)
+3. Run these commands
+```bash
+cd app
+npm install
+npm test
+```
+![alt text](images/plan2CD.png)
+## Deploy
+1. Automate so Jenkins SSH into instance
+2. 
+git publisher - plugin to be used to merge code from dev to main
+**Avoid using git commands in execute shell**
+- git merge conflict - related issues - branches issues
