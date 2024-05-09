@@ -15,3 +15,6 @@ You would use Continuous Integration and Continuous Deployment (CI/CD) to automa
 **Deploy** is live infront of users.<br>
 **Delivered** is scp or pushed then npm installed and started or we get jenkins to do it for us.<br>
 Delivery vs deploy depends on what business needs.<br>
+
+## Why choose Jenkins
+Jenkins is open source!
