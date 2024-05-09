@@ -1,5 +1,5 @@
 # CICD
-![alt text](images/breakdown.png)
+![alt text](images/breakdown.png)<br>
 Our goal is to automate the SDLV (software develplment life cycle), to do this we have to separate the main goal into smaller ones. 
 1. **Firstly,** we want to test our code works, thats what job one does.
 2. **Secondly,** we may be working with other developers so we will need to merge the codes collected in the repo if it works, this is what job two does.
