@@ -10,10 +10,11 @@
     - [7. Source code: copy ssh github link](#7-source-code-copy-ssh-github-link)
     - [8. Provide private key](#8-provide-private-key)
     - [9. Change branch to main](#9-change-branch-to-main)
-    - [10. Go to build and change to execute shell](#10-go-to-build-and-change-to-execute-shell)
+    - [10. Tick Provide Node \& npm bin/ folder to PATH](#10-tick-provide-node--npm-bin-folder-to-path)
+    - [11. Go to build and change to execute shell](#11-go-to-build-and-change-to-execute-shell)
     - [Done](#done)
   - [How to create webhook](#how-to-create-webhook)
-  - [CI](#ci-1)
+  - [CI plan](#ci-plan)
 
 ## Creating your first job
 ### 1. Login 
@@ -40,7 +41,9 @@ Click on add key and switch the kind to SSH<br>
 Paste private key into area
 ### 9. Change branch to main
 ![alt text](images/change_branch_main.png)
-### 10. Go to build and change to execute shell
+### 10. Tick Provide Node & npm bin/ folder to PATH
+![alt text](images/tick_node.png)
+### 11. Go to build and change to execute shell
 ```bash
 cd app
 npm install
@@ -49,13 +52,14 @@ npm test
 ![alt text](images/bash_input.png)<br>
 ### Done
 **Click build to execute job**
-test
+
 ## How to create webhook
 https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project<br>
 Use **http://3.9.14.9:8080/github-webhook/**
 
-## CI
-1. Create dev branch using `git checkout -b branch_name` **we do not work in the main or master branch**
-2. Change branch in Jenkins from main to dev and config web hook so job builds whenever code is pushed
-3. Create new job called "merge to main"
-4. Configure first job post build to trigger next job "merge to main" if tests are passed
+## CI plan
+![alt text](images/plan1CI.png)<br>
+We would like to combine and test codes made by different developers quickly.To do this we would have to check the code works first then merge it to the main working branch.
+1. Create dev branch using `git checkout -b dev` **we do not work in the main or master branch** then push on dev branch to update github
+2. Make first job: this will have a webhook to build whenever code is pushed on dev branch, and post build option of triggering second job
+3. Create second job called "merge to main" use post build "git publisher" and merge before build option to merge 

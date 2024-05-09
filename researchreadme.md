@@ -17,4 +17,7 @@ You would use Continuous Integration and Continuous Deployment (CI/CD) to automa
 Delivery vs deploy depends on what business needs.<br>
 
 ## Why choose Jenkins
-Jenkins is open source!
+![alt text](tool_comparisons.png)
+
+## Why use CICD
+We would like to combine and test codes made by different developers quickly.To do this we would have to check the code works first then merge it to the main working branch.
