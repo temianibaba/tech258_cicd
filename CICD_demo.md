@@ -1,6 +1,9 @@
 # CICD demo
 ![alt text](images/breakdown.png)<br>
-
+Our goal is to automate the SDLV (software develplment life cycle), to do this we have to separate the main goal into smaller ones. 
+1. **Firstly,** we want to test our code works, thats what job one does.
+2. **Secondly,** we may be working with other developers so we will need to merge the codes collected in the repo if it works, this is what job two does.
+3. **Thirdly,** once we have our working code on the main branch we want to make it available to users, so we need to put the code onto an EC2 instance and run it. This is what job 3 does.
 - [CICD demo](#cicd-demo)
   - [Creating your first job](#creating-your-first-job)
     - [1. Login](#1-login)
