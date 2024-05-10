@@ -21,8 +21,7 @@ Our goal is to automate the SDLV (software develplment life cycle), to do this w
   - [How to create webhook](#how-to-create-webhook)
   - [CI plan](#ci-plan)
 - [CD](#cd)
-  - [Delivery](#delivery)
-  - [Deploy](#deploy)
+  - [Delivery and Deployment](#delivery-and-deployment)
 ## Creating your first job
 ### 1. Login 
 ![alt text](images/jenkins_login.png)
@@ -75,21 +74,58 @@ We would like to combine and test codes made by different developers quickly.To 
 ![alt text](images/ci-merge-post-build-actions.png)
 
 # CD
-![alt text](images/plan3CD.png)
-Firstly we want to get 
-## Delivery
-1. Create ec2 instance
-2. Allow 8080 22 for now (we will need port 80 and 3000 later)
-3. Run these commands
+![alt text](images/plan3CD.png)<br>
+In this section I will be moving the tested and merged code from the main branch github repo to an EC2 server. The end goal is to get the app up and running by just pushing code to the dev branch, I will need to add a post build action to the second job to trigger my 3rd job.<br>
+**Where does Jenkins keep code?**
+Go to **workspace** (where code is) comes from git hub, jenkins can then move this code to an EC2 instance.
+## Delivery and Deployment
+![alt text](images/plan2CD.png)
+1. Launch instance with correct sg allow port 22 3000 80 8080 AND use this AMI (ami-02f0341ac93c96375)
+2. Make Jenkins job including AWS SSH private key
+3. Insert code in execute shell
+```bash
+# by pass fingerprint
+ssh -o "StrictHostKeyChecking=no" ubuntu@34.245.65.220 <<EOF
+# SSH into ec2
+# run update and upgrade
+sudo apt-get update -y
+sudo apt-get upgrade -y
+# install nginx
+sudo apt-get install nginx -y
+
+sudo systemctl enable nginx
+
+EOF
+
+# copy code from main branch
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@ec2-54-194-153-179.eu-west-1.compute.amazonaws.com:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@ec2-54-194-153-179.eu-west-1.compute.amazonaws.com:/home/ubuntu
+
+ssh -o "StrictHostKeyChecking=no" ubuntu@34.245.65.220 <<EOF
+# cd to env folder (cd environment/app)
+cd environment/app
+
+# install required dependecies using provison.sh
+sudo chmod +x provision.sh
+sudo bash ./provision.sh
+
+# navigate to app folder
+cd app
+
+# install npm
+sudo npm install pm2 -g
+
+# start app in background
+sudo pm2 kill
+sudo pm2 start app.js
+EOF
+```
+
+4. Create a new Jenkins Job for DB
 ```bash
 cd app
-npm install
-npm test
+sudo pm2 kill
+sudo 
+pm2 start app.js
 ```
-![alt text](images/plan2CD.png)
-## Deploy
-1. Automate so Jenkins SSH into instance
-2. 
-git publisher - plugin to be used to merge code from dev to main
-**Avoid using git commands in execute shell**
-- git merge conflict - related issues - branches issues
+5. kill pm2 install pm2 restart pm2
