@@ -143,10 +143,10 @@ cd app
 
 # start app in background
 export DB_HOST=mongodb://172.31.37.209:27017/posts
-sudo -E npm install
-sudo -E npm install pm2 -g
-sudo -E pm2 kill
-sudo -E pm2 start app.js
+sudo npm install
+sudo npm install pm2 -g
+sudo pm2 kill
+sudo pm2 start app.js
 EOF
 ```
 5. Then trigger the database job after the merge job
