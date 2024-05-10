@@ -85,7 +85,7 @@ Go to **workspace** (where code is) comes from git hub, jenkins can then move th
 3. Insert code in execute shell
 ```bash
 # by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@34.245.65.220 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.194.153.179 <<EOF
 # SSH into ec2
 # run update and upgrade
 sudo apt-get update -y
@@ -101,7 +101,7 @@ EOF
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@ec2-54-194-153-179.eu-west-1.compute.amazonaws.com:/home/ubuntu
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@ec2-54-194-153-179.eu-west-1.compute.amazonaws.com:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@34.245.65.220 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.194.153.179 <<EOF
 # install required dependecies using provison.sh
 sudo chmod +x ~/environment/app/provision.sh
 # sudo chmod +x ~/environment/db/provision.sh
