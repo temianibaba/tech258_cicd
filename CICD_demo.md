@@ -102,11 +102,9 @@ rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@ec2-54-194-153-179.eu
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@ec2-54-194-153-179.eu-west-1.compute.amazonaws.com:/home/ubuntu
 
 ssh -o "StrictHostKeyChecking=no" ubuntu@34.245.65.220 <<EOF
-# cd to env folder (cd environment/app)
-cd environment/app
-
 # install required dependecies using provison.sh
-sudo chmod +x provision.sh
+sudo chmod +x ~/environment/app/provision.sh
+# sudo chmod +x ~/environment/db/provision.sh
 sudo bash ./provision.sh
 
 # navigate to app folder
