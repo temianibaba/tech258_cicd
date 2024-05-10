@@ -105,7 +105,8 @@ ssh -o "StrictHostKeyChecking=no" ubuntu@34.245.65.220 <<EOF
 # install required dependecies using provison.sh
 sudo chmod +x ~/environment/app/provision.sh
 # sudo chmod +x ~/environment/db/provision.sh
-sudo bash ./provision.sh
+# sudo bash ./environment/db/provision.sh
+sudo bash ./environment/app/provision.sh
 
 # navigate to app folder
 cd app
