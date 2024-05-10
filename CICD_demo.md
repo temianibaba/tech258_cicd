@@ -128,3 +128,4 @@ sudo
 pm2 start app.js
 ```
 5. kill pm2 install pm2 restart pm2
+
