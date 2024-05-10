@@ -111,9 +111,6 @@ sudo bash ./environment/app/provision.sh
 # navigate to app folder
 cd app
 
-# install npm
-sudo npm install pm2 -g
-
 # start app in background
 sudo pm2 kill
 sudo pm2 start app.js
