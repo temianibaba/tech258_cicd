@@ -22,6 +22,7 @@ Our goal is to automate the SDLV (software develplment life cycle), to do this w
   - [CI plan](#ci-plan)
 - [CD](#cd)
   - [Delivery and Deployment](#delivery-and-deployment)
+  - [Take aways](#take-aways)
 ## Creating your first job
 ### 1. Login 
 ![alt text](images/jenkins_login.png)
@@ -80,12 +81,12 @@ In this section I will be moving the tested and merged code from the main branch
 Go to **workspace** (where code is) comes from git hub, jenkins can then move this code to an EC2 instance.
 ## Delivery and Deployment
 ![alt text](images/plan2CD.png)
-1. Launch instance with correct sg allow port 22 3000 80 8080 AND use this AMI (ami-02f0341ac93c96375)
-2. Make Jenkins job including AWS SSH private key
+1. Launch instance with correct sg allow port 22 3000 80 8080 for app (8080 22 27017 for db) AND use this AMI (ami-02f0341ac93c96375)
+2. Create a new Jenkins Job for DB
 3. Insert code in execute shell
 ```bash
 # by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@3.254.175.46 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@34.241.3.24 <<EOF
 # SSH into ec2
 # run update and upgrade
 sudo apt-get update -y
@@ -98,10 +99,39 @@ sudo systemctl enable nginx
 EOF
 
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@3.254.175.46:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@3.254.175.46:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@34.241.3.24:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@34.241.3.24:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@3.254.175.46 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@34.241.3.24 <<EOF
+# install required dependecies using provison.sh
+# sudo chmod +x ~/environment/app/provision.sh
+sudo chmod +x ~/environment/db/provision.sh
+sudo bash ./environment/db/provision.sh
+# sudo bash ./environment/app/provision.sh
+
+EOF
+```
+
+4. Make Jenkins job for app, including AWS SSH private key
+```bash
+# by pass fingerprint
+ssh -o "StrictHostKeyChecking=no" ubuntu@18.201.131.129 <<EOF
+# SSH into ec2
+# run update and upgrade
+sudo apt-get update -y
+sudo apt-get upgrade -y
+# install nginx
+sudo apt-get install nginx -y
+
+sudo systemctl enable nginx
+
+EOF
+
+# copy code from main branch
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@18.201.131.129:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@18.201.131.129:/home/ubuntu
+
+ssh -o "StrictHostKeyChecking=no" ubuntu@18.201.131.129 <<EOF
 # install required dependecies using provison.sh
 sudo chmod +x ~/environment/app/provision.sh
 # sudo chmod +x ~/environment/db/provision.sh
@@ -112,18 +142,18 @@ sudo bash ./environment/app/provision.sh
 cd app
 
 # start app in background
+export DB_HOST=mongodb://172.31.37.209:27017/posts
 sudo npm install
 sudo npm install pm2 -g
 sudo pm2 kill
 sudo pm2 start app.js
 EOF
 ```
-
-4. Create a new Jenkins Job for DB
-```bash
-cd app
-sudo pm2 kill
-sudo 
-pm2 start app.js
-```
-5. kill pm2 install pm2 restart pm2
+5. Then trigger the database job after the merge job
+6. Then trigger the app job after the database job <br>
+![alt text](images/CICD.png)
+## Take aways
+There are a few ways to install npm to get it working 
+- You can cd into the app folder after the provision script is done
+- You can use `sudo -E npm install` in your script
+- Or you can change the provision script so that it npm installs inside the app folder
