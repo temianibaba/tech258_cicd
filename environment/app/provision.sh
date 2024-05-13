@@ -14,7 +14,9 @@ sudo apt-get install git -y
 sudo apt-get install python-software-properties -y
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install nodejs -y
-sudo sed -i '51s/.*/\t        proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
+
+# reverse proxy
+# sudo sed -i '51s/.*/\t        proxy_pass http:\/\/localhost:3000;/' /etc/nginx/sites-available/default
  
 sudo systemctl restart nginx
 sudo npm install

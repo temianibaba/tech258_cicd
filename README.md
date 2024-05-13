@@ -27,8 +27,8 @@ A webhook is a mechanism that allows real-time communication between two applica
 You would use Continuous Integration and Continuous Deployment (CI/CD) to automate software development processes, ensuring faster and more reliable delivery of updates, reducing manual errors, and improving overall efficiency.
 
 ## Delivery vs Deployment
-**Deploy** is live infront of users.<br>
-**Delivered** is scp or pushed then npm installed and started or we get jenkins to do it for us.<br>
+**Deploy** is when the update or app goes live infront of users.<br>
+**Delivered** is using the scp/rsync command to get the update or app into production environment.<br>
 Delivery vs deploy depends on what business needs.<br>
 
 ## Why choose Jenkins
