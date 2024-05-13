@@ -133,3 +133,4 @@ There are a few ways to install npm to get it working
 - You can cd into the app folder after the provision script is done
 - You can use `sudo -E npm install` in your script
 - Or you can change the provision script so that it npm installs inside the app folder
+
