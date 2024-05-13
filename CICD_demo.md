@@ -119,8 +119,11 @@ cd app
 
 # start app in background
 export DB_HOST=mongodb://172.31.41.153:27017/posts
-sudo npm install
+sudo -E npm install
 sudo -E npm install pm2 -g
+cd ~/app/seeds
+node seed.js &
+cd ~/app
 sudo pm2 kill
 sudo -E pm2 start app.js
 EOF
