@@ -170,7 +170,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 3. Got to your jenkins sevrer http://<your_ec2_pub_ip>:8080/
 4. Select recommended plugins
-5. some extra plugins like amazon ec2 ssh agent node js git github branch source github
+5. Download some extra plugins like amazon ec2, ssh agent, node js, git, github branch source, github, git publisher
 6. Go to manage jenkins and tools scroll down and make a node in nodejs
 7. In security change Git Host Key Verification Configuration accept first connection
 8. Done you can now create jobs!
