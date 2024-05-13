@@ -23,6 +23,7 @@ Our goal is to automate the SDLV (software develplment life cycle), to do this w
 - [CD](#cd)
   - [Delivery and Deployment](#delivery-and-deployment)
   - [Take aways](#take-aways)
+- [Creating your own Jenkins server](#creating-your-own-jenkins-server)
 ## Creating your first job
 ### 1. Login 
 ![alt text](images/jenkins_login.png)
@@ -136,3 +137,36 @@ There are a few ways to install npm to get it working
 - You can cd into the app folder after the provision script is done
 - You can use `sudo -E npm install` in your script
 - Or you can change the provision script so that it npm installs inside the app folder
+
+# Creating your own Jenkins server
+1. Create new ec2 instance with ubuntu 22.04
+2. Run these commands
+```bash
+sudo apt update
+sudo apt upgrade
+sudo apt install fontconfig openjdk-17-jre
+java -version
+
+    sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+      https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+      https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+      /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+    sudo apt-get update
+    sudo apt-get install jenkins
+
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+# password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+ 
+  Sometimes there are issue with installing Java this way so you must use:
+  `sudo snap install openjdk`
+3. Got to your jenkins sevrer http://<your_ec2_pub_ip>:8080/
+4. Select recommended plugins
+5. Done
