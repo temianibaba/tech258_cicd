@@ -102,7 +102,7 @@ EOF
 4. Make Jenkins job for app, including AWS SSH private key
 ```bash
 # by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@3.254.125.66 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.155.209.62 <<EOF
 # SSH into ec2
 # run update and upgrade
 sudo apt-get update -y
@@ -115,10 +115,10 @@ sudo systemctl enable nginx
 EOF
 
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@3.254.125.66:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@3.254.125.66:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@54.155.209.62:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@54.155.209.62:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@3.254.125.66 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.155.209.62 <<EOF
 # install required dependecies using provison.sh
 sudo chmod +x ~/environment/app/provision.sh
 # sudo chmod +x ~/environment/db/provision.sh
