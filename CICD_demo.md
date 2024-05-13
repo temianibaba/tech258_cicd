@@ -85,24 +85,11 @@ Go to **workspace** (where code is) comes from git hub, jenkins can then move th
 2. Create a new Jenkins Job for DB
 3. Insert code in execute shell
 ```bash
-# by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@54.220.197.246 <<EOF
-# SSH into ec2
-# run update and upgrade
-sudo apt-get update -y
-sudo apt-get upgrade -y
-# install nginx
-sudo apt-get install nginx -y
-
-sudo systemctl enable nginx
-
-EOF
-
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@54.220.197.246:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@54.220.197.246:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.33.214.37:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@63.33.214.37:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@54.220.197.246 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@63.33.214.37 <<EOF
 # install required dependecies using provison.sh
 # sudo chmod +x ~/environment/app/provision.sh
 sudo chmod +x ~/environment/db/provision.sh
@@ -142,7 +129,7 @@ sudo bash ./environment/app/provision.sh
 cd app
 
 # start app in background
-export DB_HOST=mongodb://172.31.37.209:27017/posts
+export DB_HOST=mongodb://172.31.40.227:27017/posts
 sudo npm install
 sudo npm install pm2 -g
 sudo pm2 kill
