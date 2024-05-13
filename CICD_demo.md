@@ -86,10 +86,10 @@ Go to **workspace** (where code is) comes from git hub, jenkins can then move th
 3. Insert code in execute shell **NOT TESTED**
 ```bash
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.33.214.37:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@63.33.214.37:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.35.218.251:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@63.35.218.251:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@63.33.214.37 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@63.35.218.251 <<EOF
 # install required dependecies using provison.sh
 # sudo chmod +x ~/environment/app/provision.sh
 sudo chmod +x ~/environment/db/provision.sh
@@ -129,7 +129,7 @@ sudo bash ./environment/app/provision.sh
 cd app
 
 # start app in background
-export DB_HOST=mongodb://172.31.40.227:27017/posts
+export DB_HOST=mongodb://172.31.41.153:27017/posts
 sudo npm install
 sudo npm install pm2 -g
 sudo pm2 kill
