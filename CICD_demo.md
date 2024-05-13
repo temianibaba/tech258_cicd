@@ -86,7 +86,7 @@ Go to **workspace** (where code is) comes from git hub, jenkins can then move th
 3. Insert code in execute shell
 ```bash
 # by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@34.241.3.24 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.220.197.246 <<EOF
 # SSH into ec2
 # run update and upgrade
 sudo apt-get update -y
@@ -99,10 +99,10 @@ sudo systemctl enable nginx
 EOF
 
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@34.241.3.24:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@34.241.3.24:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@54.220.197.246:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@54.220.197.246:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@34.241.3.24 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@54.220.197.246 <<EOF
 # install required dependecies using provison.sh
 # sudo chmod +x ~/environment/app/provision.sh
 sudo chmod +x ~/environment/db/provision.sh
@@ -115,7 +115,7 @@ EOF
 4. Make Jenkins job for app, including AWS SSH private key
 ```bash
 # by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@18.201.131.129 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@3.254.125.66 <<EOF
 # SSH into ec2
 # run update and upgrade
 sudo apt-get update -y
@@ -128,10 +128,10 @@ sudo systemctl enable nginx
 EOF
 
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@18.201.131.129:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@18.201.131.129:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@3.254.125.66:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@3.254.125.66:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@18.201.131.129 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@3.254.125.66 <<EOF
 # install required dependecies using provison.sh
 sudo chmod +x ~/environment/app/provision.sh
 # sudo chmod +x ~/environment/db/provision.sh
