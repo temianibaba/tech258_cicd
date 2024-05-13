@@ -86,13 +86,13 @@ Delivery is using the rsync command to get the code into the prod environment.<b
 In this step I include delivery and deployment.
 1. Launch instance with correct sg allow port 22 3000 80 8080 for app (8080 22 27017 for db) AND use this AMI (ami-02f0341ac93c96375)
 2. Create a new Jenkins Job for DB
-3. Insert code in execute shell **DB DOES NOT POPULATE**
+3. Insert code in execute shell 
 ```bash
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.35.218.251:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@63.35.218.251:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.35.212.216:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@63.35.212.216:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@63.35.218.251 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@63.35.212.216 <<EOF
 # install required dependecies using provison.sh
 # sudo chmod +x ~/environment/app/provision.sh
 sudo chmod +x ~/environment/db/provision.sh
@@ -105,10 +105,10 @@ EOF
 4. Make Jenkins job for app, including AWS SSH private key
 ```bash
 # copy code from main branch
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@54.155.209.62:/home/ubuntu
-rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@54.155.209.62:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@34.250.126.31:/home/ubuntu
+rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@34.250.126.31:/home/ubuntu
 
-ssh -o "StrictHostKeyChecking=no" ubuntu@54.155.209.62 <<EOF
+ssh -o "StrictHostKeyChecking=no" ubuntu@34.250.126.31 <<EOF
 # install required dependecies using provison.sh
 sudo chmod +x ~/environment/app/provision.sh
 # sudo chmod +x ~/environment/db/provision.sh
@@ -167,6 +167,10 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
  
   Sometimes there are issue with installing Java this way so you must use:
   `sudo snap install openjdk`
+
 3. Got to your jenkins sevrer http://<your_ec2_pub_ip>:8080/
 4. Select recommended plugins
-5. Done
+5. some extra plugins like amazon ec2 ssh agent node js git github branch source github
+6. Go to manage jenkins and tools scroll down and make a node in nodejs
+7. In security change Git Host Key Verification Configuration accept first connection
+8. Done you can now create jobs!
