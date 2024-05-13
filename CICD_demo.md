@@ -83,7 +83,7 @@ Go to **workspace** (where code is) comes from git hub, jenkins can then move th
 ![alt text](images/plan2CD.png)
 1. Launch instance with correct sg allow port 22 3000 80 8080 for app (8080 22 27017 for db) AND use this AMI (ami-02f0341ac93c96375)
 2. Create a new Jenkins Job for DB
-3. Insert code in execute shell
+3. Insert code in execute shell **NOT TESTED**
 ```bash
 # copy code from main branch
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.33.214.37:/home/ubuntu
