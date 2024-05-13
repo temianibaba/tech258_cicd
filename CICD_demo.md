@@ -80,10 +80,12 @@ In this section I will be moving the tested and merged code from the main branch
 **Where does Jenkins keep code?**
 Go to **workspace** (where code is) comes from git hub, jenkins can then move this code to an EC2 instance.
 ## Delivery and Deployment
-![alt text](images/plan2CD.png)
+![alt text](images/plan2CD.png)<br>
+Delivery is using the rsync command to get the code into the prod environment.<br>
+In this step I include delivery and deployment.
 1. Launch instance with correct sg allow port 22 3000 80 8080 for app (8080 22 27017 for db) AND use this AMI (ami-02f0341ac93c96375)
 2. Create a new Jenkins Job for DB
-3. Insert code in execute shell **NOT TESTED**
+3. Insert code in execute shell **DB DOES NOT POPULATE**
 ```bash
 # copy code from main branch
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@63.35.218.251:/home/ubuntu
@@ -101,19 +103,6 @@ EOF
 
 4. Make Jenkins job for app, including AWS SSH private key
 ```bash
-# by pass fingerprint
-ssh -o "StrictHostKeyChecking=no" ubuntu@54.155.209.62 <<EOF
-# SSH into ec2
-# run update and upgrade
-sudo apt-get update -y
-sudo apt-get upgrade -y
-# install nginx
-sudo apt-get install nginx -y
-
-sudo systemctl enable nginx
-
-EOF
-
 # copy code from main branch
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" app ubuntu@54.155.209.62:/home/ubuntu
 rsync -avz -e "ssh -o StrictHostKeyChecking=no" environment ubuntu@54.155.209.62:/home/ubuntu
