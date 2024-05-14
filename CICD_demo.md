@@ -142,21 +142,28 @@ There are a few ways to install npm to get it working
 1. Create new ec2 instance with ubuntu 22.04
 2. Run these commands
 ```bash
+# Update System Packages
 sudo apt update
 sudo apt upgrade
+
+# Install Java
 sudo apt install fontconfig openjdk-17-jre
 java -version
 
-    sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
-      https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+# Add Jenkins Repository
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
-      https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
-      /etc/apt/sources.list.d/jenkins.list > /dev/null
+# Update Your System's Package Index
+sudo apt-get update
 
-    sudo apt-get update
-    sudo apt-get install jenkins
+# Install Jenkins
+sudo apt-get install jenkins
 
+# Start enable on boot and check jenkins is running
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
 sudo systemctl status jenkins
